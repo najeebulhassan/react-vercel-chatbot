@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import logo from '../../../assets/images/logo.png';
 
 export default function Header({ checked, setChecked }) {
 
@@ -64,13 +65,15 @@ export default function Header({ checked, setChecked }) {
             className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl"
         >
             <div className="flex items-center">
-                <Link target="_blank" rel="nofollow" href="/"
-                ><svg
-                    viewBox="0 0 17 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="mr-2 h-6 w-6 dark:hidden"
+                <Link rel="nofollow" to="#"
                 >
+                    <img src={logo}  alt="headerlogo"/>
+                    {/* <svg
+                        viewBox="0 0 17 17"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="mr-2 h-6 w-6 dark:hidden"
+                    >
                         <defs>
                             <linearGradient
                                 id="gradient-:R5aqja:-1"
@@ -127,8 +130,9 @@ export default function Header({ checked, setChecked }) {
                                 height="6.4"
                                 fill="url(#gradient-:R5aqja:-2)"
                             ></rect>
-                        </g></svg
-                    ><svg
+                        </g>
+                    </svg>
+                    <svg
                         viewBox="0 0 17 17"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +195,7 @@ export default function Header({ checked, setChecked }) {
                                 fill="url(#gradient-:R9aqja:-2)"
                             ></rect>
                         </g>
-                    </svg>
+                    </svg> */}
                 </Link>
                 <div className="flex items-center">
                     <svg
