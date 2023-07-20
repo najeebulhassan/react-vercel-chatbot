@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import logo from "../../../assets/images/logo.png"
-function IntroArea({ sourceId, chatMessages }) {
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
+function IntroArea({ sourceId, chatMessages, preLoader }) {
+
     return (
         <div className="pb-[200px] pt-4 md:pt-10">
-            {!chatMessages &&
+            {chatMessages.length === 0 &&
                 <div className="max-w-2xl px-4 mx-auto">
                     <div className="p-8 border rounded-lg bg-background">
                         <h1 className="mb-2 text-lg font-semibold">
@@ -182,7 +186,11 @@ function IntroArea({ sourceId, chatMessages }) {
                     <div className="h-px w-full"></div>
                 </>
             ))}
-
+            {preLoader &&
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+                    <CircularProgress />
+                </Box>
+            }
         </div>
     )
 }

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 
 
-export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMessages }) {
+export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMessages, setPreLoader }) {
     const [openPdfDrawer, setOpenPdfDrawer] = useState(false);
 
     const [newMessage, setNewMessage] = useState('');
@@ -16,6 +16,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
     }
 
     const handleChat = async (message) => {
+        setPreLoader(true);
         try {
             const apiKey = process.env.REACT_APP_API_KEY; // Replace with your actual API key
             const headers = {
@@ -39,6 +40,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
             setChatMessages([...chatMessages, { role: 'user', content: message }, { role: 'assistant', content }]);
             // setResponseContent(content);
             setNewMessage('');
+            setPreLoader(false);
         } catch (error) {
             console.error('Failed to send chat message:', error.response.data.error);
             const message = error.response.data.error;

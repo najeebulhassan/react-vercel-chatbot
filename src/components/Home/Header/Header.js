@@ -67,7 +67,7 @@ export default function Header({ checked, setChecked }) {
             <div className="flex items-center">
                 <Link rel="nofollow" to="#"
                 >
-                    <img src={logo}  alt="headerlogo"/>
+                    <img src={logo} alt="headerlogo" />
                     {/* <svg
                         viewBox="0 0 17 17"
                         fill="none"
@@ -272,9 +272,14 @@ export default function Header({ checked, setChecked }) {
                         <path
                             d="M37.5896 0.25L74.5396 64.25H0.639648L37.5896 0.25Z"
                             fill="currentColor"
-                        ></path></svg
-                    ><span className="hidden sm:block">Deploy to Vercel</span
-                    ><span className="sm:hidden">Deploy</span>
+                        ></path>
+                    </svg >
+                    <span className="hidden sm:block">
+                        Pilot App
+                    </span>
+                    <span className="sm:hidden">
+                        Deploy
+                    </span>
                 </Link>
             </div>
         </header >
