@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import AttachPdfDrawer from './AttachPdf/AttachPdfDrawer';
 import axios from 'axios';
 import { Slide, ToastContainer, toast } from 'react-toastify';
-
+import logo from "../../../assets/images/logo.png";
 
 export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMessages, setPreLoader }) {
     const [openPdfDrawer, setOpenPdfDrawer] = useState(false);
@@ -105,7 +105,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
                             <textarea
                                 tabIndex="0"
                                 rows="1"
-                                placeholder="Send a message."
+                                placeholder="Ask InstructorAI..."
                                 spellCheck="false"
                                 value={newMessage}
                                 className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
@@ -133,45 +133,12 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
                                 </button>
                             </div>
                         </div>
-
-                        <p
-                            className="px-2 text-center text-xs leading-normal text-muted-foreground hidden sm:block"
-                        >
-                            Open source AI chatbot built with
-                            <Link
-                                href="https://nextjs.org"
-                                target="_blank"
-                                className="inline-flex flex-1 justify-center gap-1 leading-4 hover:underline"
-                            ><span>Next.js</span><svg
-                                aria-hidden="true"
-                                height="7"
-                                viewBox="0 0 6 6"
-                                width="7"
-                                className="opacity-70"
-                            >
-                                    <path
-                                        d="M1.25215 5.54731L0.622742 4.9179L3.78169 1.75597H1.3834L1.38936 0.890915H5.27615V4.78069H4.40513L4.41109 2.38538L1.25215 5.54731Z"
-                                        fill="currentColor"
-                                    ></path></svg></Link>
-                            and
-                            <Link
-                                href="https://vercel.com/storage/kv"
-                                target="_blank"
-                                className="inline-flex flex-1 justify-center gap-1 leading-4 hover:underline"
-                            ><span>Vercel KV</span>
-                                <svg
-                                    aria-hidden="true"
-                                    height="7"
-                                    viewBox="0 0 6 6"
-                                    width="7"
-                                    className="opacity-70"
-                                >
-                                    <path
-                                        d="M1.25215 5.54731L0.622742 4.9179L3.78169 1.75597H1.3834L1.38936 0.890915H5.27615V4.78069H4.40513L4.41109 2.38538L1.25215 5.54731Z"
-                                        fill="currentColor"
-                                    ></path></svg>
-                            </Link>.
-                        </p>
+                        <div className="px-2 text-center flex items-center text-xs leading-normal text-muted-foreground justify-center"    >
+                            <p>
+                                Powered By Versein Company
+                            </p>
+                            <img src={logo} alt='footerlogo' style={{width:"2.5em"}} />
+                        </div>
                     </div>
                 </div>
                 <AttachPdfDrawer openPdfDrawer={openPdfDrawer} setOpenPdfDrawer={setOpenPdfDrawer} sourceId={sourceId} setSourceId={setSourceId} />

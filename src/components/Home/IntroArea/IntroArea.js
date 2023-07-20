@@ -12,16 +12,16 @@ function IntroArea({ sourceId, chatMessages, preLoader }) {
                 <div className="max-w-2xl px-4 mx-auto">
                     <div className="p-8 border rounded-lg bg-background">
                         <h1 className="mb-2 text-lg font-semibold">
-                            Welcome to Next.js AI Chatbot!
+                            Welcome, Pilots! I'm your InstructorAI.
                         </h1>
                         <p className="mb-2 leading-normal text-muted-foreground">
-                            This is an open source AI chatbot app template built with
-                            <Link
-                                href="https://nextjs.org"
-                                target="_blank"
+                            Ready to guide you, train you, and solve any decision making scenarios you might face instantly.
+
+                            {/* <Link
+                                to="#"
                                 className="inline-flex flex-1 justify-center gap-1 leading-4 hover:underline"
                             >
-                                <span>Next.js</span>
+                                <span>React.js</span>
                                 <svg
                                     aria-hidden="true"
                                     height="7"
@@ -73,12 +73,12 @@ function IntroArea({ sourceId, chatMessages, preLoader }) {
 
                                     </path>
                                 </svg>
-                            </Link>.
+                            </Link>. */}
                         </p>
                         <p className="leading-normal text-muted-foreground">
-                            You can start a conversation here or try the following examples:
+                            Let's take flight together!
                         </p>
-                        <div className="flex flex-col items-start mt-4 space-y-2">
+                        {/* <div className="flex flex-col items-start mt-4 space-y-2">
                             <button
                                 className="inline-flex items-center justify-center rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary underline-offset-4 shadow-none hover:underline h-auto p-0 text-base"
                             >
@@ -119,7 +119,7 @@ function IntroArea({ sourceId, chatMessages, preLoader }) {
                                     ></path></svg
                                 >Draft an email
                             </button>
-                        </div>
+                        </div> */}
                     </div>
 
 
