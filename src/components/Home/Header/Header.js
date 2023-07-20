@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import logo from '../../../assets/images/logo.png';
+import logo from '../../../assets/images/instructorailogo.png';
 
 export default function Header({ checked, setChecked }) {
 
@@ -64,10 +64,10 @@ export default function Header({ checked, setChecked }) {
         <header
             className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl"
         >
-            <div className="flex items-center">
+            <div className="flex items-center gap-1">
                 <Link rel="nofollow" to="#"
                 >
-                    <img src={logo} alt="headerlogo" />
+                    <img src={logo} alt="headerlogo" width='100%' />
                     {/* <svg
                         viewBox="0 0 17 17"
                         fill="none"
