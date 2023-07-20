@@ -56,6 +56,19 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
         }
     };
 
+    const handleEmptyValue = () => {
+        const message = "Ask InstructorAI Something!"
+        toast.error(message, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 3000, //3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            transition: Slide
+        });
+    }
+
     return (
         <>
             <div
@@ -117,7 +130,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
                                     type="submit"
                                     disabled={sourceId !== '' ? false : true}
                                     data-state="closed"
-                                    onClick={() => handleChat(newMessage)}
+                                    onClick={() => newMessage === "" ? handleEmptyValue() : handleChat(newMessage)}
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +150,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
                             <p>
                                 Powered By Versein Company
                             </p>
-                            <img src={logo} alt='footerlogo' style={{width:"2.5em"}} />
+                            <img src={logo} alt='footerlogo' style={{ width: "2.5em" }} />
                         </div>
                     </div>
                 </div>
