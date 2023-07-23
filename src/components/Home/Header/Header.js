@@ -5,14 +5,43 @@ import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import logo from '../../../assets/images/instructorailogo.png';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import TabContext from '@material-ui/lab/TabContext';
+import TabList from '@material-ui/lab/TabList';
+import TabPanel from '@material-ui/lab/TabPanel';
+import { makeStyles } from '@mui/styles';
+import SideBar from '../SideBar/SideBar';
 
-export default function Header({ checked, setChecked }) {
+export default function Header({ checked, setChecked, allProjects, conversations, setChatMessages, setPreLoader, setProjectId, setSessionId }) {
+    const [value, setValue] = useState('one');
 
+    const handleTabValue = (event, newValue) => {
+        setValue(newValue);
+    };
     const handleChange = (event) => {
         setChecked(event.target.checked);
     };
 
 
+    const useStyles = makeStyles({
+        tabs: {
+
+            "& .MuiTabs-indicator": {
+                backgroundColor: checked ? '#FAFAFA' : '#09090B',
+                // height: 3,
+            },
+            "& .MuiTab-root": {
+                color: checked ? '#FAFAFA' : "#71717A"
+            },
+            "& .MuiTab-root.Mui-selected": {
+                color: checked ? '#FAFAFA' : '#09090B',
+                fontWeight: "bold"
+            }
+        }
+
+    })
+    const classes = useStyles();
     const MaterialUISwitch = styled(Switch)(({ theme }) => ({
         width: 62,
         height: 34,
@@ -62,13 +91,14 @@ export default function Header({ checked, setChecked }) {
 
     return (
         <header
-            className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl"
+
         >
-            <div className="flex items-center gap-1">
-                <Link rel="nofollow" to="#"
-                >
-                    <img src={logo} alt="headerlogo" width='100%' />
-                    {/* <svg
+            <div className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl">
+                <div className="flex items-center gap-1">
+                    <Link rel="nofollow" to="#"
+                    >
+                        <img src={logo} alt="headerlogo" width='100%' />
+                        {/* <svg
                         viewBox="0 0 17 17"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -196,9 +226,9 @@ export default function Header({ checked, setChecked }) {
                             ></rect>
                         </g>
                     </svg> */}
-                </Link>
-                <div className="flex items-center">
-                    {/* <svg
+                    </Link>
+                    <div className="flex items-center">
+                        {/* <svg
                         fill="none"
                         shapeRendering="geometricPrecision"
                         stroke="currentColor"
@@ -211,11 +241,11 @@ export default function Header({ checked, setChecked }) {
                     >
                         <path d="M16.88 3.549L7.12 20.451"></path>
                     </svg> */}
-                    {/* <Link
+                        {/* <Link
                         to="#"
                         className="inline-flex items-center justify-center rounded-md text-sm font-medium shadow ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-4 py-2 ml-2"
                     > */}
-                    {/* <svg
+                        {/* <svg
                             aria-label="Vercel logomark"
                             role="img"
                             viewBox="0 0 74 64"
@@ -226,29 +256,29 @@ export default function Header({ checked, setChecked }) {
                                 fill="currentColor"
                             ></path>
                         </svg> */}
-                    <span>
-                        <b>InstructorAI</b>
-                        {/* <span className="hidden sm:inline"> with Vercel</span> */}
-                    </span>
-                    {/* </Link> */}
+                        <span>
+                            <b>InstructorAI</b>
+                            {/* <span className="hidden sm:inline"> with Vercel</span> */}
+                        </span>
+                        {/* </Link> */}
+                    </div>
                 </div>
-            </div>
-            <div className="flex items-center justify-end space-x-2">
+                <div className="flex items-center justify-end space-x-2">
 
-                <FormGroup>
-                    <FormControlLabel
-                        control={<MaterialUISwitch sx={{ m: 0 }} checked={checked} onChange={handleChange} />}
-                    // label="MUI switch"
-                    />
+                    <FormGroup>
+                        <FormControlLabel
+                            control={<MaterialUISwitch sx={{ m: 0 }} checked={checked} onChange={handleChange} />}
+                        // label="MUI switch"
+                        />
 
-                </FormGroup>
-                <Link
-                    // target="_blank"
-                    to="#"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-md text-sm font-medium shadow ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-4 py-2"
-                >
-                    {/* <svg
+                    </FormGroup>
+                    <Link
+                        // target="_blank"
+                        to="#"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center rounded-md text-sm font-medium shadow ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-4 py-2"
+                    >
+                        {/* <svg
                         role="img"
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
@@ -261,31 +291,46 @@ export default function Header({ checked, setChecked }) {
                         >
                         </path>
                     </svg> */}
-                    <span className="ml-2 hidden md:flex">Add Notes</span>
-                </Link>
-                <Link
-                    to="#"
-                    target="_blank"
-                    className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow-md hover:bg-primary/90 h-8 px-4 py-2"
-                ><svg
-                    aria-label="Vercel logomark"
-                    role="img"
-                    viewBox="0 0 74 64"
-                    className="h-4 w-4 mr-2"
-                >
-                        <path
-                            d="M37.5896 0.25L74.5396 64.25H0.639648L37.5896 0.25Z"
-                            fill="currentColor"
-                        ></path>
-                    </svg >
-                    <span className="hidden sm:block">
-                        Pilot
-                    </span>
-                    <span className="sm:hidden">
-                        Pilot
-                    </span>
-                </Link>
+                        <span className="ml-2 hidden md:flex">Add Notes</span>
+                    </Link>
+                    <Link
+                        to="#"
+                        target="_blank"
+                        className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow-md hover:bg-primary/90 h-8 px-4 py-2"
+                    ><svg
+                        aria-label="Vercel logomark"
+                        role="img"
+                        viewBox="0 0 74 64"
+                        className="h-4 w-4 mr-2"
+                    >
+                            <path
+                                d="M37.5896 0.25L74.5396 64.25H0.639648L37.5896 0.25Z"
+                                fill="currentColor"
+                            ></path>
+                        </svg >
+                        <span className="hidden sm:block">
+                            Pilot
+                        </span>
+                        <span className="sm:hidden">
+                            Pilot
+                        </span>
+                    </Link>
+                </div>
             </div>
+            <TabContext value={value}>
+                <Box sx={{ width: '100%' }}>
+                    <TabList
+                        onChange={handleTabValue}
+                        className={classes.tabs}
+                    >
+                        {allProjects.map((value, index) =>
+                            <Tab key={index} value='one' label={value.project_name} />
+                        )}
+                    </TabList>
+                </Box>
+                <SideBar allProjects={allProjects} conversations={conversations} setChatMessages={setChatMessages} setPreLoader={setPreLoader}
+                    setProjectId={setProjectId} setSessionId={setSessionId} />
+            </TabContext>
         </header >
     )
 }

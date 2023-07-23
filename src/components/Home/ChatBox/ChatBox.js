@@ -5,40 +5,50 @@ import axios from 'axios';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import logo from "../../../assets/images/logo.png";
 
-export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMessages, setPreLoader }) {
+export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMessages, setPreLoader, projectId, sessionId }) {
     const [openPdfDrawer, setOpenPdfDrawer] = useState(false);
 
     const [newMessage, setNewMessage] = useState('');
     const [responseContent, setResponseContent] = useState('');
+    console.log("newMessage", newMessage);
+    const sendConversationMessage = {
+        method: 'POST',
+        headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
+        },
+        data: { prompt: newMessage }
+    };
+
+    // const getConversationMessages = {
+    //     method: 'GET',
+    //     headers: {
+    //         accept: 'application/json',
+    //         authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
+    //     }
+    // };
+
+    console.log("proje", projectId, "sessionId", sessionId);
 
     const handleClick = () => {
         setOpenPdfDrawer(true);
     }
 
-    const handleChat = async (message) => {
+    const handleChat = async () => {
         setPreLoader(true);
+        const getConversationMessagesUrl = `https://app.customgpt.ai/api/v1/projects/${projectId}/conversations/${sessionId}/messages?stream=true`;
         try {
-            const apiKey = process.env.REACT_APP_API_KEY; // Replace with your actual API key
-            const headers = {
-                'Content-Type': 'application/json',
-                'x-api-key': apiKey,
-            };
 
-            const requestBody = {
-                sourceId,
-                messages: [
-                    ...chatMessages,
-                    {
-                        role: 'user',
-                        content: message,
-                    },
-                ],
-            };
+            axios(getConversationMessagesUrl, sendConversationMessage)
+                .then(response => {
+                    console.log("reply", response.data);
+                })
+                .catch(error => {
+                    console.error("errorReply", error);
+                });
 
-            const response = await axios.post('https://api.chatpdf.com/v1/chats/message', requestBody, { headers });
-            const { content } = response.data;
-            setChatMessages([...chatMessages, { role: 'user', content: message }, { role: 'assistant', content }]);
-            // setResponseContent(content);
+
             setNewMessage('');
             setPreLoader(false);
         } catch (error) {
@@ -103,7 +113,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
                             <div
                                 className="inline-flex items-center justify-center text-sm font-medium shadow ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4"
                                 data-state="closed"
-                                onClick={handleClick}
+                                // onClick={handleClick}
                             ><svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 256 256"
@@ -128,9 +138,9 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
                                 <button
                                     className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow-md hover:bg-primary/90 h-8 w-8 p-0"
                                     type="submit"
-                                    disabled={sourceId !== '' ? false : true}
+                                    disabled={false}
                                     data-state="closed"
-                                    onClick={() => newMessage === "" ? handleEmptyValue() : handleChat(newMessage)}
+                                    onClick={() => handleChat()}
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
