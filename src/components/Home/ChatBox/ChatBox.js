@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import logo from "../../../assets/images/logo.png";
 
-export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMessages, setPreLoader, projectId, sessionId }) {
+export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatReply, setPreLoader, projectId, sessionId }) {
     const [openPdfDrawer, setOpenPdfDrawer] = useState(false);
 
     const [newMessage, setNewMessage] = useState('');
@@ -37,12 +37,14 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
 
     const handleChat = async () => {
         setPreLoader(true);
-        const getConversationMessagesUrl = `https://app.customgpt.ai/api/v1/projects/${projectId}/conversations/${sessionId}/messages?stream=true`;
+        const getConversationMessagesUrl = `https://app.customgpt.ai/api/v1/projects/${projectId}/conversations/${sessionId}/messages`;
         try {
 
             axios(getConversationMessagesUrl, sendConversationMessage)
                 .then(response => {
                     console.log("reply", response.data);
+                    const newChatReply = response.data;
+                    setChatReply((prevChatReply) => [...prevChatReply, newChatReply]);
                 })
                 .catch(error => {
                     console.error("errorReply", error);
@@ -113,7 +115,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatMe
                             <div
                                 className="inline-flex items-center justify-center text-sm font-medium shadow ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4"
                                 data-state="closed"
-                                // onClick={handleClick}
+                            // onClick={handleClick}
                             ><svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 256 256"

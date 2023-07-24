@@ -23,6 +23,7 @@ export default function Home() {
     const [allProjects, setAllProjects] = useState([]);
     const [projectId, setProjectId] = useState('');
     const [sessionId, setSessionId] = useState('');
+    const [chatReply, setChatReply] = useState([]);
 
     const fetchData = async () => {
         try {
@@ -69,12 +70,15 @@ export default function Home() {
                     setPreLoader={setPreLoader}
                     setSessionId={setSessionId}
                     setProjectId={setProjectId}
+                    setChatReply={setChatReply}
                 />
                 <main className="flex flex-col flex-1 bg-muted/50">
                     <IntroArea
                         sourceId={sourceId}
                         chatMessages={chatMessages}
                         preLoader={preLoader}
+                        chatReply={chatReply}
+
                     />
                     <ChatBox
                         sourceId={sourceId}
@@ -84,6 +88,7 @@ export default function Home() {
                         setPreLoader={setPreLoader}
                         sessionId={sessionId}
                         projectId={projectId}
+                        setChatReply={setChatReply}
                     />
                 </main>
             </div>

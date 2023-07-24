@@ -4,7 +4,7 @@ import Drawer from '@mui/material/Drawer';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
 
-export default function SideBar({ allProjects, conversations, setChatMessages, setPreLoader, setSessionId, setProjectId }) {
+export default function SideBar({ allProjects, conversations, setChatMessages, setPreLoader, setSessionId, setProjectId, setChatReply }) {
 
     const API_BASE_URL = 'https://app.customgpt.ai/api/v1';
     const useStyles = makeStyles({
@@ -35,6 +35,7 @@ export default function SideBar({ allProjects, conversations, setChatMessages, s
             const response = await axios.get(getConversationMessagesUrl, getConversationMessages);
             console.log('getConversationMessages', response.data.data.messages.data);
             setChatMessages(response.data.data.messages.data);
+            setChatReply([]);
             setPreLoader(false);
         } catch (error) {
             console.error('getConversationMessagesError', error);
