@@ -43,8 +43,8 @@ export default function Header({ checked, setChecked, allProjects, conversations
     })
     const classes = useStyles();
     const MaterialUISwitch = styled(Switch)(({ theme }) => ({
-        width: 62,
-        height: 34,
+        width: 52,
+        height: 24,
         padding: 7,
         '& .MuiSwitch-switchBase': {
             margin: 1,
@@ -66,8 +66,8 @@ export default function Header({ checked, setChecked, allProjects, conversations
         },
         '& .MuiSwitch-thumb': {
             backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
-            width: 32,
-            height: 32,
+            width: 22,
+            height: 22,
             '&:before': {
                 content: "''",
                 position: 'absolute',
