@@ -11,15 +11,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
     const [newMessage, setNewMessage] = useState('');
     const [responseContent, setResponseContent] = useState('');
 
-    const sendConversationMessage = {
-        method: 'POST',
-        headers: {
-            accept: 'application/json',
-            'content-type': 'application/json',
-            authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
-        },
-        data: { prompt: newMessage }
-    };
+
 
     // const getConversationMessages = {
     //     method: 'GET',
@@ -37,10 +29,16 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
 
     const handleChat = async () => {
         setPreLoader(true);
-        const getConversationMessagesUrl = `https://app.customgpt.ai/api/v1/projects/${projectId}/conversations/${sessionId}/messages`;
+
+        const options = {
+            method: 'POST',
+            url: 'http://localhost:8000/send-message',
+            params: { project_id: projectId, session_id: sessionId, send_message: newMessage }
+        };
+
         try {
 
-            axios(getConversationMessagesUrl, sendConversationMessage)
+            axios.request(options)
                 .then(response => {
 
                     const newChatReply = response.data;
