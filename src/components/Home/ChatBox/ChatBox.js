@@ -10,7 +10,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
 
     const [newMessage, setNewMessage] = useState('');
     const [responseContent, setResponseContent] = useState('');
-    
+
     const sendConversationMessage = {
         method: 'POST',
         headers: {
@@ -29,7 +29,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
     //     }
     // };
 
-    
+
 
     const handleClick = () => {
         setOpenPdfDrawer(true);
@@ -42,7 +42,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
 
             axios(getConversationMessagesUrl, sendConversationMessage)
                 .then(response => {
-                    
+
                     const newChatReply = response.data;
                     setChatReply((prevChatReply) => [...prevChatReply, newChatReply]);
                 })
@@ -80,6 +80,13 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
             transition: Slide
         });
     }
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent form submission on Enter key
+            handleChat();
+        }
+    };
 
     return (
         <>
@@ -134,6 +141,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
                                 spellCheck="false"
                                 value={newMessage}
                                 className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
+                                onKeyDown={handleKeyPress}
                                 onChange={(event) => setNewMessage(event.target.value)}
                             ></textarea>
                             <div className="absolute right-0 top-4 sm:right-4">
