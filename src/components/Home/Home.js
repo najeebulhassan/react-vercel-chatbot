@@ -32,7 +32,7 @@ export default function Home() {
                 headers: API_HEADERS,
             });
 
-            console.log('getProjects', projectsResponse.data);
+            
             setAllProjects(projectsResponse.data.data.data);
 
             if (projectsResponse.data.data.data.length > 0) {
@@ -45,7 +45,7 @@ export default function Home() {
                     }
                 );
 
-                console.log('getConversations', conversationsResponse.data.data.data);
+                
                 setConversations(conversationsResponse.data.data.data);
             }
         } catch (error) {

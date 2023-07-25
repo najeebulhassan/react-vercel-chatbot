@@ -25,7 +25,7 @@ export default function SideBar({ allProjects, conversations, setChatMessages, s
     const handleChat = async (value) => {
         setPreLoader(true);
         try {
-            console.log('value', value);
+            
             const { session_id, project_id } = value;
             setSessionId(session_id);
             setProjectId(project_id);
@@ -33,7 +33,7 @@ export default function SideBar({ allProjects, conversations, setChatMessages, s
             const getConversationMessagesUrl = `${API_BASE_URL}/projects/${project_id}/conversations/${session_id}/messages`;
 
             const response = await axios.get(getConversationMessagesUrl, getConversationMessages);
-            console.log('getConversationMessages', response.data.data.messages.data);
+  
             setChatMessages(response.data.data.messages.data);
             setChatReply([]);
             setPreLoader(false);

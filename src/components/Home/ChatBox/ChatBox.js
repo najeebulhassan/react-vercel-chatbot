@@ -10,7 +10,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
 
     const [newMessage, setNewMessage] = useState('');
     const [responseContent, setResponseContent] = useState('');
-    console.log("newMessage", newMessage);
+    
     const sendConversationMessage = {
         method: 'POST',
         headers: {
@@ -29,7 +29,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
     //     }
     // };
 
-    console.log("proje", projectId, "sessionId", sessionId);
+    
 
     const handleClick = () => {
         setOpenPdfDrawer(true);
@@ -42,7 +42,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
 
             axios(getConversationMessagesUrl, sendConversationMessage)
                 .then(response => {
-                    console.log("reply", response.data);
+                    
                     const newChatReply = response.data;
                     setChatReply((prevChatReply) => [...prevChatReply, newChatReply]);
                 })

@@ -125,7 +125,7 @@ function IntroArea({ sourceId, chatMessages, preLoader, chatReply }) {
 
                 </div>
             }
-            {console.log("chatReply", chatReply)}
+            
             {chatMessages && chatMessages.sort((a, b) => new Date(a.updated_at) - new Date(b.updated_at)).map((message, index) => (
                 <AiConversation message={message} index={index} />
             ))}

@@ -42,7 +42,7 @@ function AttachPdfDrawer({ openPdfDrawer, setOpenPdfDrawer, setSourceId }) {
                 transition: Slide
             });
             setOpenPdfDrawer(false);
-            console.log('PDF added successfully! Source ID:', sourceId);
+            
         } catch (error) {
             console.error('Failed to add PDF:', error.message);
         }
