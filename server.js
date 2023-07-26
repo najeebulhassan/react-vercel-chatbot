@@ -7,22 +7,75 @@ require('dotenv').config()
 
 const app = express()
 app.use(cors())
-app.get('/', (req, res) => {
-    res.json('hi')
+// app.get('/', (req, res) => {
+//     res.json('hi')
+// })
+
+app.get('/get-projects', (req, res) => {
+
+    const API_BASE_URL = 'https://app.customgpt.ai/api/v1';
+    const API_HEADERS = {
+        accept: 'application/json',
+        authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+    };
+
+    try {
+        axios.get(`${API_BASE_URL}/projects`, {
+            method: 'GET',
+            headers: API_HEADERS,
+        }).then(response => {
+
+            res.json(response.data)
+        })
+
+
+    } catch (error) {
+        console.error('API Error', error);
+    }
+
 })
 
-app.post('/send-message', (req, res) => {
-    console.log("req.query.project_id", req);
-    const getConversationMessagesUrl = `https://app.customgpt.ai/api/v1/projects/${req.query.project_id}/conversations/${req.query.session_id}/messages`;
+app.get('/conversations', (req, res) => {
+    const API_BASE_URL = 'https://app.customgpt.ai/api/v1';
+    const API_HEADERS = {
+        accept: 'application/json',
+        authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+    };
+    const projectId = req.query.project_id;
+    axios.get(
+        `${API_BASE_URL}/projects/${projectId}/conversations`,
+        {
+            method: 'GET',
+            headers: API_HEADERS,
+        }
+    ).then(response => {
+        console.log("response", response);
+        res.json(response.data)
+    })
+
+
+})
+// dynamic method handling getting messages according to the clicked conversation and having further conversation 
+
+app.all('/send-message', (req, res) => {
+    const projectId = req.query.project_id;
+    const sessionId = req.query.session_id;
+    const userMessage = req.query.send_message;
+    const httpMethod = req.method;
+    const getConversationMessagesUrl = `https://app.customgpt.ai/api/v1/projects/${projectId}/conversations/${sessionId}/messages`;
     const sendConversationMessage = {
-        method: 'POST',
+        method: httpMethod,
         headers: {
             accept: 'application/json',
             'content-type': 'application/json',
             authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
         },
-        data: { prompt: req.query.send_message }
     };
+
+    if (userMessage) {
+        sendConversationMessage.data = { prompt: userMessage };
+    }
+
     if (req.query.project_id && req.query.session_id && req.query.send_message !== "") {
         try {
 
@@ -40,16 +93,6 @@ app.post('/send-message', (req, res) => {
 
         } catch (error) {
             console.error('Failed to send chat message:', error.response.data.error);
-            const message = error.response.data.error;
-            toast.error(message, {
-                position: toast.POSITION.BOTTOM_RIGHT,
-                autoClose: 3000, //3 seconds
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                transition: Slide
-            });
         }
     }
 })

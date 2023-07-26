@@ -1,9 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from "../../../../assets/images/logo.png"
 
-export default function AiConversation({ index, message }) {
+export default function AiConversation({ message, isReply }) {
+    const [displayedText, setDisplayedText] = useState('');
+
+    useEffect(() => {
+        // Replace 'streamedText' with the actual response you receive from the API
+        const fullText = message.openai_response;
+        const words = fullText.split(' ');
+
+        let currentIndex = 0;
+        const wordDisplayInterval = 100; // Time (in milliseconds) between displaying each word
+
+        const interval = setInterval(() => {
+            if (currentIndex < words.length) {
+                setDisplayedText((prevDisplayedText) => prevDisplayedText + words[currentIndex] + ' ');
+                currentIndex++;
+            } else {
+                clearInterval(interval);
+            }
+        }, wordDisplayInterval);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [message]);
+
+
     return (
-        <div key={index + message.id} className="relative mx-auto max-w-2xl px-4">
+        <div className="relative mx-auto max-w-2xl px-4">
             <div>
                 <div className="group relative mb-4 flex items-start md:-ml-12">
                     <div
@@ -60,7 +85,7 @@ export default function AiConversation({ index, message }) {
                         <div
                             className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
                         >
-                            <p className="mb-2 last:mb-0">{message.openai_response}</p>
+                            <p className="mb-2 last:mb-0">{isReply ? displayedText : message.openai_response}</p>
                         </div>
                         <div
                             className="flex items-center justify-end transition-opacity group-hover:opacity-100 md:absolute md:-right-10 md:-top-2 md:opacity-0"

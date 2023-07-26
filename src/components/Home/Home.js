@@ -8,11 +8,6 @@ import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
 import ViewListRoundedIcon from '@mui/icons-material/ViewListRounded';
 import axios from 'axios';
 
-const API_BASE_URL = 'https://app.customgpt.ai/api/v1';
-const API_HEADERS = {
-    accept: 'application/json',
-    authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
-};
 
 export default function Home() {
     const [checked, setChecked] = useState(false);
@@ -24,28 +19,32 @@ export default function Home() {
     const [projectId, setProjectId] = useState('');
     const [sessionId, setSessionId] = useState('');
     const [chatReply, setChatReply] = useState([]);
-
+    const [projectIndex, setProjectIndex] = useState(0);
     const fetchData = async () => {
-        try {
-            const projectsResponse = await axios.get(`${API_BASE_URL}/projects`, {
-                method: 'GET',
-                headers: API_HEADERS,
-            });
 
-            
+        const projects = {
+            accept: 'application/json',
+            method: 'GET',
+            url: 'http://localhost:8000/get-projects'
+        };
+
+
+
+        try {
+            const projectsResponse = await axios.request(projects);
+
+            console.log("projectsResponse", projectsResponse.data.data);
             setAllProjects(projectsResponse.data.data.data);
 
             if (projectsResponse.data.data.data.length > 0) {
-                const projectId = projectsResponse.data.data.data[0].id;
-                const conversationsResponse = await axios.get(
-                    `${API_BASE_URL}/projects/${projectId}/conversations`,
-                    {
-                        method: 'GET',
-                        headers: API_HEADERS,
-                    }
-                );
+                const conversations = {
+                    accept: 'application/json',
+                    method: 'GET',
+                    url: 'http://localhost:8000/conversations',
+                    params: { project_id: projectsResponse.data.data.data[projectIndex].id }
+                };
+                const conversationsResponse = await axios.request(conversations);
 
-                
                 setConversations(conversationsResponse.data.data.data);
             }
         } catch (error) {
@@ -55,7 +54,7 @@ export default function Home() {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [projectIndex]);
 
     return (
         <div className="font-sans antialiased __variable_0ec1f4 __variable_71fa92">
@@ -71,6 +70,7 @@ export default function Home() {
                     setSessionId={setSessionId}
                     setProjectId={setProjectId}
                     setChatReply={setChatReply}
+                    setProjectIndex={setProjectIndex}
                 />
                 <main className="flex flex-col flex-1 bg-muted/50">
                     <IntroArea

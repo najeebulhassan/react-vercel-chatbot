@@ -125,13 +125,13 @@ function IntroArea({ sourceId, chatMessages, preLoader, chatReply }) {
 
                 </div>
             }
-            
+
             {chatMessages && chatMessages.sort((a, b) => new Date(a.updated_at) - new Date(b.updated_at)).map((message, index) => (
-                <AiConversation message={message} index={index} />
+                <AiConversation message={message} key={index} />
             ))}
 
             {chatReply.map((reply, index) =>
-                <AiConversation message={reply.data} index={index} />
+                <AiConversation message={reply.data} key={index} isReply={true} />
             )}
             {preLoader &&
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>

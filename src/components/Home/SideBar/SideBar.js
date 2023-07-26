@@ -15,25 +15,26 @@ export default function SideBar({ allProjects, conversations, setChatMessages, s
 
     })
     const classes = useStyles();
-    const getConversationMessages = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
-        }
-    };
+
     const handleChat = async (value) => {
         setPreLoader(true);
+
+        const { session_id, project_id } = value;
+        const options = {
+            method: 'GET',
+            url: 'http://localhost:8000/send-message',
+            params: { project_id: project_id, session_id: session_id }
+        };
         try {
-            
-            const { session_id, project_id } = value;
+
+
             setSessionId(session_id);
             setProjectId(project_id);
 
-            const getConversationMessagesUrl = `${API_BASE_URL}/projects/${project_id}/conversations/${session_id}/messages`;
+            
 
-            const response = await axios.get(getConversationMessagesUrl, getConversationMessages);
-  
+            const response = await axios.request(options);
+
             setChatMessages(response.data.data.messages.data);
             setChatReply([]);
             setPreLoader(false);

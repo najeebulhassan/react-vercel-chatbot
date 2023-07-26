@@ -13,7 +13,8 @@ import TabPanel from '@material-ui/lab/TabPanel';
 import { makeStyles } from '@mui/styles';
 import SideBar from '../SideBar/SideBar';
 
-export default function Header({ checked, setChecked, allProjects, conversations, setChatMessages, setPreLoader, setProjectId, setSessionId, setChatReply }) {
+export default function Header({ checked, setChecked, allProjects, conversations, setChatMessages, setPreLoader, setProjectId, setSessionId, setChatReply,
+    setProjectIndex }) {
     const [value, setValue] = useState('one');
 
     const handleTabValue = (event, newValue) => {
@@ -88,6 +89,13 @@ export default function Header({ checked, setChecked, allProjects, conversations
             borderRadius: 20 / 2,
         },
     }));
+
+    // Setting the index to get the project data according to the selected project in tab 
+
+    const handleTabClick = (event, index) => {
+        setProjectIndex(index);
+    };
+
 
     return (
         <header
@@ -324,7 +332,8 @@ export default function Header({ checked, setChecked, allProjects, conversations
                         className={classes.tabs}
                     >
                         {allProjects.map((value, index) =>
-                            <Tab key={index} value='one' label={value.project_name} />
+
+                            < Tab key={index} value='one' label={value.project_name} onClick={(event) => handleTabClick(event, index)} />
                         )}
                     </TabList>
                 </Box>

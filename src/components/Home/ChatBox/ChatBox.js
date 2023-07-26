@@ -1,32 +1,12 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import AttachPdfDrawer from './AttachPdf/AttachPdfDrawer';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import logo from "../../../assets/images/logo.png";
 
 export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatReply, setPreLoader, projectId, sessionId }) {
-    const [openPdfDrawer, setOpenPdfDrawer] = useState(false);
 
     const [newMessage, setNewMessage] = useState('');
-    const [responseContent, setResponseContent] = useState('');
-
-
-
-    // const getConversationMessages = {
-    //     method: 'GET',
-    //     headers: {
-    //         accept: 'application/json',
-    //         authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
-    //     }
-    // };
-
-
-
-    const handleClick = () => {
-        setOpenPdfDrawer(true);
-    }
-
+    console.log("projectId, sessionId", projectId, sessionId);
     const handleChat = async () => {
         setPreLoader(true);
 
@@ -172,7 +152,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
                         </div>
                     </div>
                 </div>
-                <AttachPdfDrawer openPdfDrawer={openPdfDrawer} setOpenPdfDrawer={setOpenPdfDrawer} sourceId={sourceId} setSourceId={setSourceId} />
+
             </div>
         </>
     )
