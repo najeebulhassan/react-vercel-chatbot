@@ -3,6 +3,7 @@ import logo from "../../../../assets/images/logo.png"
 
 export default function AiConversation({ message, isReply }) {
     const [displayedText, setDisplayedText] = useState('');
+    const [textData, setTextData] = useState('');
 
     useEffect(() => {
         // Replace 'streamedText' with the actual response you receive from the API
@@ -25,6 +26,38 @@ export default function AiConversation({ message, isReply }) {
             clearInterval(interval);
         };
     }, [message]);
+
+    // Fetch data from the API and set the state
+    useEffect(() => {
+        // Your API call to fetch the data goes here...
+        // For demonstration purposes, I'm using a mock data response
+        const mockApiResponse = isReply ? displayedText : message.openai_response;
+
+        setTextData(mockApiResponse);
+    }, [textData, displayedText]);
+
+
+    // Function to render paragraphs and organized points
+    const renderParagraphs = () => {
+        const paragraphs = textData.split('\n');
+
+        return paragraphs.map((paragraph, index) => {
+            // Check if the paragraph starts with a number followed by a dot
+            // or a bullet point to render as a numbered or bulleted list
+            if (paragraph.match(/^\s*\d+\.\s+/) || paragraph.match(/^\s*[\u2022\u2023\u25E6\u2043]\s+/)) {
+                // For numbered list, use <ol> and <li> tags
+                // For bulleted list, use <ul> and <li> tags
+                return (
+                    <ul key={index}>
+                        <li>{paragraph}</li>
+                    </ul>
+                );
+            } else {
+                // Render regular paragraphs using <p> tags
+                return <p style={{ marginTop: "0px" }} key={index}>{paragraph}</p>;
+            }
+        });
+    };
 
 
     return (
@@ -85,7 +118,16 @@ export default function AiConversation({ message, isReply }) {
                         <div
                             className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
                         >
-                            <p className="mb-2 last:mb-0">{isReply ? displayedText : message.openai_response}</p>
+                            <div className="mb-2 last:mb-0">
+                                {
+                                    textData ? (
+                                        renderParagraphs()
+                                    ) : (
+                                        <p>Loading data...</p>
+                                    )
+
+                                }
+                            </div>
                         </div>
                         <div
                             className="flex items-center justify-end transition-opacity group-hover:opacity-100 md:absolute md:-right-10 md:-top-2 md:opacity-0"

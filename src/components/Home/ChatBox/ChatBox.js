@@ -47,7 +47,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
     };
 
     const handleEmptyValue = () => {
-        const message = "Ask InstructorAI Something!"
+        const message = "Ask InstructorX Something!"
         toast.error(message, {
             position: toast.POSITION.BOTTOM_RIGHT,
             autoClose: 3000, //3 seconds
@@ -115,7 +115,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
                             <textarea
                                 tabIndex="0"
                                 rows="1"
-                                placeholder="Ask InstructorAI..."
+                                placeholder="Ask InstructorX..."
                                 spellCheck="false"
                                 value={newMessage}
                                 className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"

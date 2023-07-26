@@ -12,7 +12,7 @@ function IntroArea({ sourceId, chatMessages, preLoader, chatReply }) {
                 <div className="max-w-2xl px-4 mx-auto">
                     <div className="p-8 border rounded-lg bg-background">
                         <h1 className="mb-2 text-lg font-semibold">
-                            Welcome, Pilots! I'm your InstructorAI.
+                            Welcome, Pilots! I'm your InstructorX.
                         </h1>
                         <p className="mb-2 leading-normal text-muted-foreground">
                             Ready to guide you, train you, and solve any decision making scenarios you might face instantly.

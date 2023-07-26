@@ -265,7 +265,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
                             ></path>
                         </svg> */}
                         <span>
-                            <b>InstructorAI</b>
+                            <b>InstructorX</b>
                             {/* <span className="hidden sm:inline"> with Vercel</span> */}
                         </span>
                         {/* </Link> */}
