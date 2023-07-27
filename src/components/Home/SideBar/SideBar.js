@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TabPanel from '@material-ui/lab/TabPanel';
 import Drawer from '@mui/material/Drawer';
 import { makeStyles } from '@mui/styles';
@@ -15,12 +15,18 @@ export default function SideBar({ setQuestions, conversations, setChatMessages, 
 
     })
     const classes = useStyles();
+    {/* uncomment start  */ }
+    // const handleChat = async (value) => {
+    {/* uncomment end  */ }
 
-    const handleChat = async (value) => {
+    useEffect(async () => {
+
         setPreLoader(true);
         // emptying array of asked questions if new conversation is clicked 
         setQuestions([]);
-        const { session_id, project_id } = value;
+        // const { session_id, project_id } = value; uncomment this line 
+        const project_id = 9161;
+        const session_id = 'f9e9bad0-bcef-4c80-993e-ed717ddcadaf';
         const options = {
             method: 'GET',
             url: `${backendUrl}/send-message`,
@@ -39,11 +45,16 @@ export default function SideBar({ setQuestions, conversations, setChatMessages, 
         } catch (error) {
             console.error('getConversationMessagesError', error);
         }
-    };
 
+    }, [])
+
+    {/* uncomment start  */ }
+    // };
+    {/* uncomment end  */ }
     return (
         <>
-            <Drawer
+            {/* uncomment start  */}
+            {/* <Drawer
                 anchor={'left'}
                 open={false}
                 // onClose={() => setOpenPdfDrawer(false)}
@@ -73,8 +84,8 @@ export default function SideBar({ setQuestions, conversations, setChatMessages, 
                     </TabPanel>
 
                 </>
-            </Drawer>
-
+            </Drawer> */}
+            {/* uncomment end  */}
         </>
     )
 }

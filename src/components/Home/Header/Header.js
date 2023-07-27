@@ -324,8 +324,9 @@ export default function Header({ checked, setChecked, allProjects, conversations
                     </Link>
                 </div>
             </div>
-            <TabContext value={value}>
-                <Box sx={{ width: '100%' }}>
+            {/* <TabContext value={value}> uncomment this line  */}
+            {/* uncomment start  */}
+            {/* <Box sx={{ width: '100%' }}>
                     <TabList
                         onChange={handleTabValue}
                         className={classes.tabs}
@@ -335,10 +336,12 @@ export default function Header({ checked, setChecked, allProjects, conversations
                             < Tab key={index} value='one' label={value.project_name} onClick={(event) => handleTabClick(event, index)} />
                         )}
                     </TabList>
-                </Box>
-                <SideBar allProjects={allProjects} conversations={conversations} setChatMessages={setChatMessages} setPreLoader={setPreLoader}
-                    setProjectId={setProjectId} setSessionId={setSessionId} setChatReply={setChatReply} backendUrl={backendUrl} setQuestions={setQuestions} />
-            </TabContext>
+                </Box> */}
+            {/* uncomment end  */}
+
+            <SideBar allProjects={allProjects} conversations={conversations} setChatMessages={setChatMessages} setPreLoader={setPreLoader}
+                setProjectId={setProjectId} setSessionId={setSessionId} setChatReply={setChatReply} backendUrl={backendUrl} setQuestions={setQuestions} />
+            {/* </TabContext> uncomment this line  */}
         </header >
     )
 }
