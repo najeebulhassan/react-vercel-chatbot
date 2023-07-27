@@ -20,13 +20,6 @@ export default function Home() {
     const [sessionId, setSessionId] = useState('');
     const [chatReply, setChatReply] = useState([]);
     const [projectIndex, setProjectIndex] = useState(0);
-
-    if (process.env.NODE_ENV === 'development') {
-        alert(1)
-    } else if (process.env.NODE_ENV === 'production') {
-        alert(2)
-    }
-
     const fetchData = async () => {
 
         const projects = {
