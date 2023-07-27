@@ -22,12 +22,12 @@ export default function Home() {
     const [projectIndex, setProjectIndex] = useState(0);
     const [backendUrl, setBackendUrl] = useState('https://tan-fierce-gazelle.cyclic.app');
 
-    if (process.env.NODE_ENV === 'development') {
-        setBackendUrl('http://localhost:8000');
-    } else if (process.env.NODE_ENV === 'production') {
-        setBackendUrl('https://tan-fierce-gazelle.cyclic.app');
-        console.log("backendUrl", backendUrl);
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //     setBackendUrl('http://localhost:8000');
+    // } else if (process.env.NODE_ENV === 'production') {
+    //     setBackendUrl('https://tan-fierce-gazelle.cyclic.app');
+    //     console.log("backendUrl", backendUrl);
+    // }
     const fetchData = async () => {
 
         const projects = {
