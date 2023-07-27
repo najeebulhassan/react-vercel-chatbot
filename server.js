@@ -98,4 +98,4 @@ app.all('/send-message', (req, res) => {
 })
 
 
-app.listen(8000, () => console.log(`running on port ${PORT}`))
+app.listen(8000 || process.env.PORT , () => console.log(`running on port ${PORT}`))

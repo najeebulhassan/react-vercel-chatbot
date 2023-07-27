@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import logo from "../../../assets/images/logo.png";
 
-export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatReply, setPreLoader, projectId, sessionId }) {
+export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatReply, setPreLoader, projectId, sessionId, backendUrl }) {
 
     const [newMessage, setNewMessage] = useState('');
     console.log("projectId, sessionId", projectId, sessionId);
@@ -12,7 +12,7 @@ export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatRe
 
         const options = {
             method: 'POST',
-            url: 'http://localhost:8000/send-message',
+            url: `${backendUrl}/send-message`,
             params: { project_id: projectId, session_id: sessionId, send_message: newMessage }
         };
 

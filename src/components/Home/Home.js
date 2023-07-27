@@ -20,12 +20,20 @@ export default function Home() {
     const [sessionId, setSessionId] = useState('');
     const [chatReply, setChatReply] = useState([]);
     const [projectIndex, setProjectIndex] = useState(0);
+    const [backendUrl, setBackendUrl] = useState('');
+
+    if (process.env.NODE_ENV === 'development') {
+        setBackendUrl('http://localhost:8000');
+    } else if (process.env.NODE_ENV === 'production') {
+        setBackendUrl('https://tan-fierce-gazelle.cyclic.app');
+        console.log("backendUrl", backendUrl);
+    }
     const fetchData = async () => {
 
         const projects = {
             accept: 'application/json',
             method: 'GET',
-            url: 'http://localhost:8000/get-projects'
+            url: `${backendUrl}/get-projects`
         };
 
 
@@ -40,7 +48,7 @@ export default function Home() {
                 const conversations = {
                     accept: 'application/json',
                     method: 'GET',
-                    url: 'http://localhost:8000/conversations',
+                    url: `${backendUrl}/conversations`,
                     params: { project_id: projectsResponse.data.data.data[projectIndex].id }
                 };
                 const conversationsResponse = await axios.request(conversations);
@@ -71,6 +79,7 @@ export default function Home() {
                     setProjectId={setProjectId}
                     setChatReply={setChatReply}
                     setProjectIndex={setProjectIndex}
+                    backendUrl={backendUrl}
                 />
                 <main className="flex flex-col flex-1 bg-muted/50">
                     <IntroArea
@@ -89,6 +98,7 @@ export default function Home() {
                         sessionId={sessionId}
                         projectId={projectId}
                         setChatReply={setChatReply}
+                        backendUrl={backendUrl}
                     />
                 </main>
             </div>

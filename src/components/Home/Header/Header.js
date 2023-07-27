@@ -14,7 +14,7 @@ import { makeStyles } from '@mui/styles';
 import SideBar from '../SideBar/SideBar';
 
 export default function Header({ checked, setChecked, allProjects, conversations, setChatMessages, setPreLoader, setProjectId, setSessionId, setChatReply,
-    setProjectIndex }) {
+    setProjectIndex, backendUrl }) {
     const [value, setValue] = useState('one');
 
     const handleTabValue = (event, newValue) => {
@@ -338,7 +338,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
                     </TabList>
                 </Box>
                 <SideBar allProjects={allProjects} conversations={conversations} setChatMessages={setChatMessages} setPreLoader={setPreLoader}
-                    setProjectId={setProjectId} setSessionId={setSessionId} setChatReply={setChatReply} />
+                    setProjectId={setProjectId} setSessionId={setSessionId} setChatReply={setChatReply} backendUrl={backendUrl} />
             </TabContext>
         </header >
     )
