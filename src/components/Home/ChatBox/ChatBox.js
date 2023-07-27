@@ -3,13 +3,16 @@ import axios from 'axios';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import logo from "../../../assets/images/logo.png";
 
-export default function ChatBox({ sourceId, setSourceId, chatMessages, setChatReply, setPreLoader, projectId, sessionId, backendUrl }) {
+export default function ChatBox({ questions, setQuestions, SourceId, chatMessages, setChatReply, setPreLoader, projectId, sessionId, backendUrl }) {
 
     const [newMessage, setNewMessage] = useState('');
-    console.log("projectId, sessionId", projectId, sessionId);
+
+    console.log("projectId, sessionId", projectId, sessionId, "questions", questions);
+
     const handleChat = async () => {
         setPreLoader(true);
-
+        // setting up array of questions asked 
+        setQuestions((prevQuestions) => [...prevQuestions, newMessage]);
         const options = {
             method: 'POST',
             url: `${backendUrl}/send-message`,

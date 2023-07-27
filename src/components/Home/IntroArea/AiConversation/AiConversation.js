@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import logo from "../../../../assets/images/logo.png"
 
-export default function AiConversation({ message, isReply }) {
+export default function AiConversation({ message, isReply, question }) {
     const [displayedText, setDisplayedText] = useState('');
     const [textData, setTextData] = useState('');
 
@@ -84,7 +84,7 @@ export default function AiConversation({ message, isReply }) {
                         <div
                             className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
                         >
-                            <p className="mb-2 last:mb-0">{message.user_query}</p>
+                            <p className="mb-2 last:mb-0">{isReply ? question : message.user_query}</p>
                         </div>
                         <div
                             className="flex items-center justify-end transition-opacity group-hover:opacity-100 md:absolute md:-right-10 md:-top-2 md:opacity-0"

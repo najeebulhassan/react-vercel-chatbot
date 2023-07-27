@@ -13,8 +13,7 @@ import TabPanel from '@material-ui/lab/TabPanel';
 import { makeStyles } from '@mui/styles';
 import SideBar from '../SideBar/SideBar';
 
-export default function Header({ checked, setChecked, allProjects, conversations, setChatMessages, setPreLoader, setProjectId, setSessionId, setChatReply,
-    setProjectIndex, backendUrl }) {
+export default function Header({ checked, setChecked, allProjects, conversations, setChatMessages, setPreLoader, setProjectId, setSessionId, setChatReply, setProjectIndex, backendUrl, setQuestions }) {
     const [value, setValue] = useState('one');
 
     const handleTabValue = (event, newValue) => {
@@ -338,7 +337,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
                     </TabList>
                 </Box>
                 <SideBar allProjects={allProjects} conversations={conversations} setChatMessages={setChatMessages} setPreLoader={setPreLoader}
-                    setProjectId={setProjectId} setSessionId={setSessionId} setChatReply={setChatReply} backendUrl={backendUrl} />
+                    setProjectId={setProjectId} setSessionId={setSessionId} setChatReply={setChatReply} backendUrl={backendUrl} setQuestions={setQuestions} />
             </TabContext>
         </header >
     )

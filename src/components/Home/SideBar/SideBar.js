@@ -4,7 +4,7 @@ import Drawer from '@mui/material/Drawer';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
 
-export default function SideBar({ allProjects, conversations, setChatMessages, setPreLoader, setSessionId, setProjectId, setChatReply, backendUrl }) {
+export default function SideBar({ setQuestions, conversations, setChatMessages, setPreLoader, setSessionId, setProjectId, setChatReply, backendUrl }) {
 
     const API_BASE_URL = 'https://app.customgpt.ai/api/v1';
     const useStyles = makeStyles({
@@ -18,7 +18,8 @@ export default function SideBar({ allProjects, conversations, setChatMessages, s
 
     const handleChat = async (value) => {
         setPreLoader(true);
-
+        // emptying array of asked questions if new conversation is clicked 
+        setQuestions([]);
         const { session_id, project_id } = value;
         const options = {
             method: 'GET',
@@ -27,11 +28,8 @@ export default function SideBar({ allProjects, conversations, setChatMessages, s
         };
         try {
 
-
             setSessionId(session_id);
             setProjectId(project_id);
-
-
 
             const response = await axios.request(options);
 

@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import AiConversation from './AiConversation/AiConversation';
+import Questions from './Questions/Questions';
+import Answers from './Answers/Answers';
 
-function IntroArea({ sourceId, chatMessages, preLoader, chatReply }) {
-
+function IntroArea({ questions, chatMessages, preLoader, chatReply }) {
+    const conversationData = questions.map((question, index) => {
+        return {
+            question,
+            answer: chatReply[index]?.data || '' // If answer is not available yet, use an empty string
+        };
+    });
     return (
         <div className="pb-[200px] pt-4 md:pt-10">
             {chatMessages.length === 0 &&
@@ -130,9 +137,29 @@ function IntroArea({ sourceId, chatMessages, preLoader, chatReply }) {
                 <AiConversation message={message} key={index} />
             ))}
 
-            {chatReply.map((reply, index) =>
-                <AiConversation message={reply.data} key={index} isReply={true} />
-            )}
+            {/* {chatReply.map((reply, index) =>
+                <AiConversation message={reply.data} question={questions} key={index} isReply={true} />
+            )} */}
+
+            <div className="relative mx-auto max-w-2xl px-4">
+                <div>
+                    {conversationData.map((item, index) => (
+                        <React.Fragment key={index}>
+                            {console.log("ïtemmmm", item.question)}
+                            <Questions message={item.question} question={item.question} isReply={true} />
+                            {item.answer && <Answers message={item.answer} />}
+
+                            <div
+                                data-orientation="horizontal"
+                                role="none"
+                                className="shrink-0 bg-border h-[1px] w-full my-4 md:my-8"
+                            ></div>
+                        </React.Fragment>
+                    ))}
+
+                </div>
+            </div>
+
             {preLoader &&
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
                     <CircularProgress />

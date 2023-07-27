@@ -23,6 +23,7 @@ export default function Home() {
     const backendProdUrl = 'https://tan-fierce-gazelle.cyclic.app';
     const backendLocalUrl = 'http://localhost:8000';
     const isProduction = process.env.NODE_ENV === 'production';
+    const [questions, setQuestions] = useState([]);
 
     let backendUrl = isProduction ? backendProdUrl : backendLocalUrl
     // if (process.env.NODE_ENV === 'development') {
@@ -83,6 +84,7 @@ export default function Home() {
                     setChatReply={setChatReply}
                     setProjectIndex={setProjectIndex}
                     backendUrl={backendUrl}
+                    setQuestions={setQuestions}
                 />
                 <main className="flex flex-col flex-1 bg-muted/50">
                     <IntroArea
@@ -90,6 +92,7 @@ export default function Home() {
                         chatMessages={chatMessages}
                         preLoader={preLoader}
                         chatReply={chatReply}
+                        questions={questions}
 
                     />
                     <ChatBox
@@ -102,6 +105,7 @@ export default function Home() {
                         projectId={projectId}
                         setChatReply={setChatReply}
                         backendUrl={backendUrl}
+                        setQuestions={setQuestions}
                     />
                 </main>
             </div>
