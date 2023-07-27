@@ -20,7 +20,7 @@ export default function Home() {
     const [sessionId, setSessionId] = useState('');
     const [chatReply, setChatReply] = useState([]);
     const [projectIndex, setProjectIndex] = useState(0);
-    const [backendUrl, setBackendUrl] = useState('');
+    const [backendUrl, setBackendUrl] = useState('https://tan-fierce-gazelle.cyclic.app');
 
     if (process.env.NODE_ENV === 'development') {
         setBackendUrl('http://localhost:8000');
