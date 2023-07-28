@@ -26,7 +26,7 @@ export default function SideBar({ setQuestions, conversations, setChatMessages, 
         setQuestions([]);
         // const { session_id, project_id } = value; uncomment this line 
         const project_id = 9161;
-        const session_id = 'f9e9bad0-bcef-4c80-993e-ed717ddcadaf';
+        const session_id = '239f6e45-c60a-4d71-a5c2-f54531350131';
         const options = {
             method: 'GET',
             url: `${backendUrl}/send-message`,

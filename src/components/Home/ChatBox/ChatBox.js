@@ -96,14 +96,14 @@ export default function ChatBox({ questions, setQuestions, SourceId, chatMessage
                     <div
                         className="space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4"
                     >
-
-                        <div
+                        {/* only for demo  */}
+                        <div style={{ paddingLeft: '0px' }}
                             className="relative flex flex-col w-full px-8 overflow-hidden max-h-60 grow bg-background sm:rounded-md sm:border sm:px-12"
                         >
-                            <div
+                            {/* <div
                                 className="inline-flex items-center justify-center text-sm font-medium shadow ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4"
                                 data-state="closed"
-                            // onClick={handleClick}
+                            onClick={handleClick}
                             ><svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 256 256"
@@ -114,7 +114,7 @@ export default function ChatBox({ questions, setQuestions, SourceId, chatMessage
                                     ></path>
                                 </svg>
                                 <span className="sr-only">New Chat</span>
-                            </div>
+                            </div> */}
                             <textarea
                                 tabIndex="0"
                                 rows="1"
