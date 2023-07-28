@@ -16,7 +16,7 @@ export default function ChatBox({ questions, setQuestions, SourceId, chatMessage
         const options = {
             method: 'POST',
             url: `${backendUrl}/send-message`,
-            params: { project_id: projectId, session_id: sessionId, send_message: newMessage + " give me a short answer." }
+            params: { project_id: projectId, session_id: sessionId, send_message: newMessage  }
         };
 
         try {
