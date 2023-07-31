@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
@@ -20,6 +20,8 @@ import Fade from '@mui/material/Fade';
 export default function Header({ checked, setChecked, allProjects, conversations, setChatMessages, setPreLoader, setProjectId, setSessionId, setChatReply, setProjectIndex, backendUrl, setQuestions }) {
     const [value, setValue] = useState('one');
     const [openModal, setOpenModal] = React.useState(false);
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
     const handleTabValue = (event, newValue) => {
         setValue(newValue);
     };
@@ -27,6 +29,18 @@ export default function Header({ checked, setChecked, allProjects, conversations
         setChecked(event.target.checked);
     };
 
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const useStyles = makeStyles({
         tabs: {
@@ -113,7 +127,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '50%',
+        width: isSmallScreen ? '90%' : '50%',
         bgcolor: checked ? 'black' : 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
