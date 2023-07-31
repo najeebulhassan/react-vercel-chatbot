@@ -1,7 +1,23 @@
 import React from 'react';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 export default function Questions({ question, checked }) {
 
+    const handleCopyQuery = (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(question)
+
+        toast.success("Copied to clipboard!", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 3000, //3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            transition: Slide
+        });
+
+    };
 
     return (
         <div className="group relative mb-4 flex items-start md:-ml-12">
@@ -33,6 +49,7 @@ export default function Questions({ question, checked }) {
                     {/* copy text button */}
                     <button
                         className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 shadow-none hover:bg-accent hover:text-accent-foreground h-8 w-8 p-0"
+                        onClick={handleCopyQuery}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

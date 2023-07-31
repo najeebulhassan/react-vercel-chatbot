@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 import logo from "../../../../assets/images/logo.png";
 
 export default function Answers({ message, isReply }) {
@@ -82,6 +83,23 @@ export default function Answers({ message, isReply }) {
             clearInterval(interval); // Clean up the interval on component unmount
         };
     }, [message.openai_response]);
+
+    const handleCopyPara = (e) => {
+        e.preventDefault();
+
+        navigator.clipboard.writeText(displayedText);
+        toast.success("Copied to clipboard!", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 3000, //3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            transition: Slide
+        });
+    }
+
+
     return (
         <div className="group relative mb-4 flex items-start md:-ml-12">
             <div
@@ -117,6 +135,7 @@ export default function Answers({ message, isReply }) {
                 >
                     <button
                         className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 shadow-none hover:bg-accent hover:text-accent-foreground h-8 w-8 p-0"
+                        onClick={handleCopyPara}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

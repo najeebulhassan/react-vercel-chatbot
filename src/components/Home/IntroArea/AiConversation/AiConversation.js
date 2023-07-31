@@ -70,11 +70,6 @@ export default function AiConversation({ message, isReply, question, checked }) 
         e.preventDefault();
         navigator.clipboard.writeText(isReply ? question : message.user_query)
 
-        // inputRef.current.select();
-        // document.execCommand('copy');
-        // // Optionally, you can show a notification or perform any other action after copying.
-        // // alert('Copied to clipboard!');
-        // isReply ? question : message.user_query
         toast.success("Copied to clipboard!", {
             position: toast.POSITION.BOTTOM_RIGHT,
             autoClose: 3000, //3 seconds
