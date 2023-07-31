@@ -129,7 +129,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
         transform: 'translate(-50%, -50%)',
         width: isSmallScreen ? '90%' : '50%',
         bgcolor: checked ? 'black' : 'background.paper',
-        border: '2px solid #000',
+        border: `2px solid ${checked ? "white" : "#000"}`,
         boxShadow: 24,
         p: 4,
     };
