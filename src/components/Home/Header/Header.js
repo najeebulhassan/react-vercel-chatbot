@@ -13,10 +13,13 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { makeStyles } from '@mui/styles';
 import SideBar from '../SideBar/SideBar';
+import Modal from '@mui/material/Modal';
+import Backdrop from '@mui/material/Backdrop';
+import Fade from '@mui/material/Fade';
 
 export default function Header({ checked, setChecked, allProjects, conversations, setChatMessages, setPreLoader, setProjectId, setSessionId, setChatReply, setProjectIndex, backendUrl, setQuestions }) {
     const [value, setValue] = useState('one');
-
+    const [openModal, setOpenModal] = React.useState(false);
     const handleTabValue = (event, newValue) => {
         setValue(newValue);
     };
@@ -100,6 +103,23 @@ export default function Header({ checked, setChecked, allProjects, conversations
     const handleTabClick = (event, index) => {
         setProjectIndex(index);
     };
+
+    const handleOpen = () => setOpenModal(true);
+    const handleClose = () => setOpenModal(false);
+
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '50%',
+        bgcolor: checked ? 'black' : 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+
 
 
     return (
@@ -315,10 +335,50 @@ export default function Header({ checked, setChecked, allProjects, conversations
                         
                         <span className="ml-2 hidden md:flex">Add Notes</span>
                     </Link> */}
-                    {/* <Link
+                    <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        open={openModal}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        slots={{ backdrop: Backdrop }}
+                        slotProps={{
+                            backdrop: {
+                                timeout: 500,
+                            },
+                        }}
+                    >
+                        <Fade in={openModal}>
+                            <Box sx={style}>
+                                <Typography id="transition-modal-title" variant="h6" component="h2">
+                                    <b>Hello Our Valued Pilots,</b>
+                                </Typography>
+                                <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                                    Our InstructorX, the brilliant aviation training and pilot knowledge platform, was meticulously crafted by our team for testing and staging purposes.
+                                </Typography>
+                                <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                                    Our mission is to elevate aviation training and pilot knowledge to new heights, empowering pilots like you to excel in their journeys.
+                                </Typography>
+                                <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                                    <b>Versein Global Inc.</b><br />
+                                    166 Geary Street, 15th Floor,<br />
+                                    San Francisco, CA 94108,<br />
+                                    United States.
+                                </Typography>
+                                <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                                    For any inquiries or assistance, feel free to call us at <b> +1 (513) 285-3736</b>.
+                                </Typography>
+                                <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                                    Thank you for joining us on this incredible flight!
+                                </Typography>
+                            </Box>
+                        </Fade>
+                    </Modal>
+                    <Link
                         to="#"
                         // target="_blank"
                         className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow-md hover:bg-primary/90 h-8 px-4 py-2"
+                        onClick={handleOpen}
                     ><svg
                         aria-label="Vercel logomark"
                         role="img"
@@ -331,12 +391,12 @@ export default function Header({ checked, setChecked, allProjects, conversations
                             ></path>
                         </svg >
                         <span className="hidden sm:block">
-                            Pilot
+                            Info
                         </span>
                         <span className="sm:hidden">
-                            Pilot
+                            Info
                         </span>
-                    </Link> */}
+                    </Link>
                 </div>
             </div>
             {/* <TabContext value={value}> uncomment this line  */}
