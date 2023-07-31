@@ -45,7 +45,6 @@ export default function Header({ checked, setChecked, allProjects, conversations
             top: 0,
             left: 0,
             width: '100%',
-            background: '#fff', // Set the background color of your header
             zIndex: 999, // Set a higher z-index to ensure the header stays on top of other elements
             // Add any other styles you want for your header
         },

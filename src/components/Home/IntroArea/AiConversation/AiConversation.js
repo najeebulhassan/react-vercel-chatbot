@@ -68,29 +68,30 @@ export default function AiConversation({ message, isReply, question, checked }) 
     const inputRef = useRef(null);
     const handleCopyQuery = (e) => {
         e.preventDefault();
+        navigator.clipboard.writeText(isReply ? question : message.user_query)
 
-        if (inputRef.current) {
-            inputRef.current.select();
-            document.execCommand('copy');
-            // Optionally, you can show a notification or perform any other action after copying.
-            // alert('Copied to clipboard!');
-            toast.success("Copied to clipboard!", {
-                position: toast.POSITION.BOTTOM_RIGHT,
-                autoClose: 3000, //3 seconds
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                transition: Slide
-            });
-        }
+        // inputRef.current.select();
+        // document.execCommand('copy');
+        // // Optionally, you can show a notification or perform any other action after copying.
+        // // alert('Copied to clipboard!');
+        // isReply ? question : message.user_query
+        toast.success("Copied to clipboard!", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 3000, //3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            transition: Slide
+        });
+
     };
 
     const handleCopyPara = (e) => {
         e.preventDefault();
 
         navigator.clipboard.writeText(displayedText)
-
+        console.log('handleCopyPara function called');
         toast.success("Copied to clipboard!", {
             position: toast.POSITION.BOTTOM_RIGHT,
             autoClose: 3000, //3 seconds
@@ -126,15 +127,15 @@ export default function AiConversation({ message, isReply, question, checked }) 
                         <div
                             className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
                         >
-                            <input
+                            {/* <input
                                 ref={inputRef}
                                 type="text"
                                 defaultValue={isReply ? question : message.user_query}
                                 readOnly
                                 className="mb-2 last:mb-0"
                                 style={{ outline: 'none' }}
-                            />
-                            {/* <p className="mb-2 last:mb-0">{isReply ? question : message.user_query}</p> */}
+                            /> */}
+                            <p className="mb-2 last:mb-0">{isReply ? question : message.user_query}</p>
                         </div>
                         <div
                             className="flex items-center justify-end transition-opacity group-hover:opacity-100 md:absolute md:-right-10 md:-top-2 md:opacity-0"
