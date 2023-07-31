@@ -107,9 +107,9 @@ export default function Header({ checked, setChecked, allProjects, conversations
         >
             <div className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl">
                 <div className="flex items-center gap-1">
-                    <Link rel="nofollow" to="#"
-                    >
-                        <img src={logo} alt="headerlogo" width='90%' />
+                    {/* <Link rel="nofollow" to="#"
+                    > */}
+                        {/* <img src={logo} alt="headerlogo" width='90%' /> */}
                         {/* <svg
                         viewBox="0 0 17 17"
                         fill="none"
@@ -238,7 +238,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
                             ></rect>
                         </g>
                     </svg> */}
-                    </Link>
+                    {/* </Link> */}
                     <div className="flex items-center">
                         {/* <svg
                         fill="none"
@@ -299,7 +299,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
                         
                         <span className="ml-2 hidden md:flex">Add Notes</span>
                     </Link> */}
-                    <Link
+                    {/* <Link
                         to="#"
                         // target="_blank"
                         className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow-md hover:bg-primary/90 h-8 px-4 py-2"
@@ -320,7 +320,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
                         <span className="sm:hidden">
                             Pilot
                         </span>
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
             {/* <TabContext value={value}> uncomment this line  */}
