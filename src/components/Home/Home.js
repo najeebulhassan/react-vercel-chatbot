@@ -93,6 +93,7 @@ export default function Home() {
                         preLoader={preLoader}
                         chatReply={chatReply}
                         questions={questions}
+                        checked={checked}
 
                     />
                     <ChatBox

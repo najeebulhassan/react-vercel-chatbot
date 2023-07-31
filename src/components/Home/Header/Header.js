@@ -39,9 +39,19 @@ export default function Header({ checked, setChecked, allProjects, conversations
                 color: checked ? '#FAFAFA' : '#09090B',
                 fontWeight: "bold"
             }
-        }
+        },
+        header: {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            background: '#fff', // Set the background color of your header
+            zIndex: 999, // Set a higher z-index to ensure the header stays on top of other elements
+            // Add any other styles you want for your header
+        },
 
     })
+
     const classes = useStyles();
     const AntSwitch = styled(Switch)(({ theme }) => ({
         width: 28,
@@ -94,7 +104,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
 
     return (
         <header
-
+            className={classes.header}
         >
             <div className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl">
                 <div className="flex items-center gap-1">

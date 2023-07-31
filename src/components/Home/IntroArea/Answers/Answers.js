@@ -4,37 +4,43 @@ import logo from "../../../../assets/images/logo.png";
 export default function Answers({ message, isReply }) {
     const [displayedText, setDisplayedText] = useState('');
     const [textData, setTextData] = useState('');
+    const [preLoaderText, setPreLoaderText] = useState(['InstructorX analyzing ...', 'InstructorX found optimal answer ... ', 'InstructorX suggest to get ready for the answer ...']);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         // Replace 'streamedText' with the actual response you receive from the API
-        const fullText = message.openai_response;
-        const words = fullText.split(' ');
+        if (message.openai_response) {
+            const fullText = message.openai_response;
+            const words = fullText.split(' ');
 
-        let currentIndex = 0;
-        const wordDisplayInterval = 100; // Time (in milliseconds) between displaying each word
+            let currentIndex = 0;
+            const wordDisplayInterval = 100; // Time (in milliseconds) between displaying each word
 
-        const interval = setInterval(() => {
-            if (currentIndex < words.length) {
-                setDisplayedText((prevDisplayedText) => prevDisplayedText + words[currentIndex] + ' ');
-                currentIndex++;
-            } else {
+            const interval = setInterval(() => {
+                if (currentIndex < words.length) {
+                    setDisplayedText((prevDisplayedText) => prevDisplayedText + words[currentIndex] + ' ');
+                    currentIndex++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, wordDisplayInterval);
+
+            return () => {
                 clearInterval(interval);
-            }
-        }, wordDisplayInterval);
-
-        return () => {
-            clearInterval(interval);
-        };
-    }, [message]);
+            };
+        }
+    }, [message.openai_response]);
 
     // Fetch data from the API and set the state
     useEffect(() => {
         // Your API call to fetch the data goes here...
         // For demonstration purposes, I'm using a mock data response
-        const mockApiResponse = displayedText;
+        if (message.openai_response) {
+            const mockApiResponse = displayedText;
 
-        setTextData(mockApiResponse);
-    }, [textData, displayedText]);
+            setTextData(mockApiResponse);
+        }
+    }, [textData, displayedText, message.openai_response]);
 
 
     // Function to render paragraphs and organized points
@@ -58,27 +64,51 @@ export default function Answers({ message, isReply }) {
             }
         });
     };
+
+
+
+
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => prevIndex + 1);
+        }, 5000);
+
+        if (message.openai_response) {
+            clearInterval(interval);
+        }
+
+        return () => {
+            clearInterval(interval); // Clean up the interval on component unmount
+        };
+    }, [message.openai_response]);
     return (
         <div className="group relative mb-4 flex items-start md:-ml-12">
             <div
                 className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow bg-background"
             >
-                {message.openai_response &&
-                    <img src={logo} alt="chatlogo" />
-                }
+                {/* {message && */}
+                <img src={logo} alt="chatlogo" />
+                {/* } */}
             </div>
             <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
                 <div
                     className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
                 >
                     <div className="mb-2 last:mb-0">
-                        {
-                            textData ? (
+                        {message.openai_response
+                            ?
+                            (textData &&
                                 renderParagraphs()
-                            ) : (
-                                <p>Loading data...</p>
                             )
-
+                            :
+                            <span className="loader">
+                                {
+                                    currentIndex < preLoaderText.length
+                                        ? preLoaderText[currentIndex]
+                                        : preLoaderText[preLoaderText.length - 1]
+                                }
+                            </span>
                         }
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Questions({ question }) {
+export default function Questions({ question, checked }) {
 
 
     return (
@@ -21,7 +21,7 @@ export default function Questions({ question }) {
                     </svg>
                 }
             </div>
-            <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
+            <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1" style={{ padding: '1em', background: checked ? "black" : "white" }}>
                 <div
                     className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
                 >

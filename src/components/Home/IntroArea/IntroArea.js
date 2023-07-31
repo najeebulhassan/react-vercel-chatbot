@@ -6,7 +6,7 @@ import AiConversation from './AiConversation/AiConversation';
 import Questions from './Questions/Questions';
 import Answers from './Answers/Answers';
 
-function IntroArea({ questions, chatMessages, preLoader, chatReply }) {
+function IntroArea({ questions, chatMessages, preLoader, chatReply, checked }) {
     const conversationData = questions.map((question, index) => {
         return {
             question,
@@ -14,10 +14,10 @@ function IntroArea({ questions, chatMessages, preLoader, chatReply }) {
         };
     });
     return (
-        <div className="pb-[200px] pt-4 md:pt-10">
+        <div className="pb-[200px] pt-4 md:pt-10" style={{ paddingTop: "5rem" }}>
             {chatMessages.length === 0 &&
-                <div className="max-w-2xl px-4 mx-auto">
-                    <div className="p-8 border rounded-lg bg-background">
+                <div className={`max-w-2xl px-4 mx-auto`}>
+                    <div className={`p-8 border rounded-lg bg-background ${preLoader ? 'loader' : ""}`}>
                         <h1 className="mb-2 text-lg font-semibold">
                             Welcome, Pilots! I'm your InstructorX.
                         </h1>
@@ -134,7 +134,7 @@ function IntroArea({ questions, chatMessages, preLoader, chatReply }) {
             }
 
             {chatMessages && chatMessages.sort((a, b) => new Date(a.updated_at) - new Date(b.updated_at)).map((message, index) => (
-                <AiConversation message={message} key={index} />
+                <AiConversation message={message} key={index} checked={checked} />
             ))}
 
             {/* {chatReply.map((reply, index) =>
@@ -146,8 +146,8 @@ function IntroArea({ questions, chatMessages, preLoader, chatReply }) {
                     {conversationData.map((item, index) => (
                         <React.Fragment key={index}>
                             {console.log("ïtemmmm", item.question)}
-                            <Questions message={item.question} question={item.question} isReply={true} />
-                            {item.answer && <Answers message={item.answer} />}
+                            <Questions message={item.question} question={item.question} isReply={true} checked={checked} />
+                            <Answers message={item.answer} />
 
                             <div
                                 data-orientation="horizontal"
@@ -160,11 +160,11 @@ function IntroArea({ questions, chatMessages, preLoader, chatReply }) {
                 </div>
             </div>
 
-            {preLoader &&
+            {/* {preLoader &&
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
                     <CircularProgress />
                 </Box>
-            }
+            } */}
         </div>
     )
 }

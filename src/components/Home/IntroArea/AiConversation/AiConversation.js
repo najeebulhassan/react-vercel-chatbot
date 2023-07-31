@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import logo from "../../../../assets/images/logo.png"
+import React, { useEffect, useState, useRef } from 'react';
+import logo from "../../../../assets/images/logo.png";
+import { makeStyles } from '@mui/styles';
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function AiConversation({ message, isReply, question }) {
+export default function AiConversation({ message, isReply, question, checked }) {
     const [displayedText, setDisplayedText] = useState('');
     const [textData, setTextData] = useState('');
+
+
 
     useEffect(() => {
         // Replace 'streamedText' with the actual response you receive from the API
@@ -60,10 +65,47 @@ export default function AiConversation({ message, isReply, question }) {
     };
 
 
+    const inputRef = useRef(null);
+    const handleCopyQuery = (e) => {
+        e.preventDefault();
+
+        if (inputRef.current) {
+            inputRef.current.select();
+            document.execCommand('copy');
+            // Optionally, you can show a notification or perform any other action after copying.
+            // alert('Copied to clipboard!');
+            toast.success("Copied to clipboard!", {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                autoClose: 3000, //3 seconds
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                transition: Slide
+            });
+        }
+    };
+
+    const handleCopyPara = (e) => {
+        e.preventDefault();
+
+        navigator.clipboard.writeText(displayedText)
+
+        toast.success("Copied to clipboard!", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 3000, //3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            transition: Slide
+        });
+    }
+
     return (
         <div className="relative mx-auto max-w-2xl px-4">
             <div>
-                <div className="group relative mb-4 flex items-start md:-ml-12">
+                <div className="group relative mb-4 flex items-start md:-ml-12" style={{ alignItems: "center" }}>
                     <div
                         className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow bg-background"
                     >
@@ -80,17 +122,26 @@ export default function AiConversation({ message, isReply, question }) {
                             </svg>
                         }
                     </div>
-                    <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
+                    <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1" style={{ padding: '1em', background: checked ? "black" : "white" }}>
                         <div
                             className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
                         >
-                            <p className="mb-2 last:mb-0">{isReply ? question : message.user_query}</p>
+                            <input
+                                ref={inputRef}
+                                type="text"
+                                defaultValue={isReply ? question : message.user_query}
+                                readOnly
+                                className="mb-2 last:mb-0"
+                                style={{ outline: 'none' }}
+                            />
+                            {/* <p className="mb-2 last:mb-0">{isReply ? question : message.user_query}</p> */}
                         </div>
                         <div
                             className="flex items-center justify-end transition-opacity group-hover:opacity-100 md:absolute md:-right-10 md:-top-2 md:opacity-0"
                         >
                             <button
                                 className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 shadow-none hover:bg-accent hover:text-accent-foreground h-8 w-8 p-0"
+                                onClick={handleCopyQuery}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -134,6 +185,7 @@ export default function AiConversation({ message, isReply, question }) {
                         >
                             <button
                                 className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 shadow-none hover:bg-accent hover:text-accent-foreground h-8 w-8 p-0"
+                                onClick={handleCopyPara}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
