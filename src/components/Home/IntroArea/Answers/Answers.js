@@ -5,7 +5,7 @@ import logo from "../../../../assets/images/logo.png";
 export default function Answers({ message, isReply }) {
     const [displayedText, setDisplayedText] = useState('');
     const [textData, setTextData] = useState('');
-    const [preLoaderText, setPreLoaderText] = useState(['InstructorX analyzing', 'InstructorX is checking the accurate answer for you', 'InstructorX has found the answer']);
+    const [preLoaderText, setPreLoaderText] = useState(['InstructorX is checking the accurate answer', 'InstructorX has found the answer', 'Get ready to copy the answer advised by InstructorX']);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {

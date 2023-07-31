@@ -18,11 +18,11 @@ function IntroArea({ questions, chatMessages, preLoader, chatReply, checked }) {
             {chatMessages.length === 0 &&
                 <div className={`max-w-2xl px-4 mx-auto`}>
                     <div className={`p-8 border rounded-lg bg-background ${preLoader ? 'loader' : ""}`}>
-                        <h1 className="mb-2 text-lg font-semibold">
-                            Welcome, Pilots! I'm your InstructorX.
+                        <h1 className="mb-4 text-lg font-semibold" style={{ lineHeight: "1.3rem" }}>
+                            I am InstructorX, your dedicated Instructor Pilot.
                         </h1>
-                        <p className="mb-2 leading-normal text-muted-foreground">
-                            Ready to guide you, train you, and solve any decision making scenarios you might face instantly.
+                        <p className="mb-2 leading-normal text-muted-foreground" style={{ marginBottom: "0px" }}>
+                            Ready to train you and tackle your decision-making.
 
                             {/* <Link
                                 to="#"
@@ -83,7 +83,7 @@ function IntroArea({ questions, chatMessages, preLoader, chatReply, checked }) {
                             </Link>. */}
                         </p>
                         <p className="leading-normal text-muted-foreground">
-                            Let's take flight together!
+                            Let's take one or many flights together!
                         </p>
                         {/* <div className="flex flex-col items-start mt-4 space-y-2">
                             <button
