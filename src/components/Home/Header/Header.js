@@ -53,7 +53,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
 
     const classes = useStyles();
     const AntSwitch = styled(Switch)(({ theme }) => ({
-        width: 28,
+        width: 40,
         height: 16,
         padding: 0,
         display: 'flex',
@@ -68,11 +68,11 @@ export default function Header({ checked, setChecked, allProjects, conversations
         '& .MuiSwitch-switchBase': {
             padding: 2,
             '&.Mui-checked': {
-                transform: 'translateX(12px)',
+                transform: 'translateX(24px)',
                 color: '#fff',
                 '& + .MuiSwitch-track': {
                     opacity: 1,
-                    backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
+                    backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : 'white',
                 },
             },
         },
@@ -84,12 +84,13 @@ export default function Header({ checked, setChecked, allProjects, conversations
             transition: theme.transitions.create(['width'], {
                 duration: 200,
             }),
+            color: !checked ? "white" : "black"
         },
         '& .MuiSwitch-track': {
             borderRadius: 16 / 2,
             opacity: 1,
             backgroundColor:
-                theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
+                theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.35)' : 'black',
             boxSizing: 'border-box',
         },
     }));
@@ -109,8 +110,8 @@ export default function Header({ checked, setChecked, allProjects, conversations
                 <div className="flex items-center gap-1">
                     {/* <Link rel="nofollow" to="#"
                     > */}
-                        {/* <img src={logo} alt="headerlogo" width='90%' /> */}
-                        {/* <svg
+                    {/* <img src={logo} alt="headerlogo" width='90%' /> */}
+                    {/* <svg
                         viewBox="0 0 17 17"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -278,17 +279,32 @@ export default function Header({ checked, setChecked, allProjects, conversations
                 <div className="flex items-center justify-end space-x-2">
 
                     <Stack direction="row" spacing={1} alignItems="center">
-                        {checked &&
-                            <Typography>
-                                <LightModeIcon style={{ width: "1rem" }} />
-                            </Typography>
-                        }
-                        <AntSwitch checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'ant design' }} />
                         {!checked &&
                             <Typography>
-                                <DarkModeIcon style={{ width: "1rem" }} />
+                                {/* <LightModeIcon style={{ width: "1rem" }} /> */}
+                                <span style={{
+                                    fontFamily: 'Inter, sans-serif', fontWeight: '400', fontSize: "9px", fontStyle: "normal"
+                                    , lineHeight: "normal"
+                                }}>
+                                    Dark Mode
+                                </span>
                             </Typography>
+
                         }
+                        {checked &&
+                            <Typography>
+                                {/* <DarkModeIcon style={{ width: "1rem" }} /> */}
+                                <span style={{
+                                    fontFamily: 'Inter, sans-serif', fontWeight: '400', fontSize: "9px", fontStyle: "normal"
+                                    , lineHeight: "normal"
+                                }}>
+                                    Light Mode
+                                </span>
+                            </Typography>
+
+                        }
+                        <AntSwitch checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'ant design' }} />
+
                     </Stack>
                     {/* <Link
                         // target="_blank"
