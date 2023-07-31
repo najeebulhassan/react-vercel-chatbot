@@ -16,7 +16,7 @@ export default function ChatBox({ questions, setQuestions, SourceId, chatMessage
         const options = {
             method: 'POST',
             url: `${backendUrl}/send-message`,
-            params: { project_id: projectId, session_id: sessionId, send_message: newMessage  }
+            params: { project_id: projectId, session_id: sessionId, send_message: newMessage }
         };
 
         try {
@@ -35,7 +35,7 @@ export default function ChatBox({ questions, setQuestions, SourceId, chatMessage
             setNewMessage('');
             setPreLoader(false);
         } catch (error) {
-            console.error('Failed to send chat message:', error.response.data.error);
+            console.error('Failed to send chat message:', error);
             const message = error.response.data.error;
             toast.error(message, {
                 position: toast.POSITION.BOTTOM_RIGHT,
@@ -65,9 +65,15 @@ export default function ChatBox({ questions, setQuestions, SourceId, chatMessage
     const handleKeyPress = (event) => {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault(); // Prevent form submission on Enter key
-            handleChat();
+            if (newMessage === "") {
+                handleEmptyValue()
+            } else {
+                handleChat();
+            }
         }
     };
+
+
 
     return (
         <>
@@ -131,7 +137,7 @@ export default function ChatBox({ questions, setQuestions, SourceId, chatMessage
                                     type="submit"
                                     disabled={false}
                                     data-state="closed"
-                                    onClick={() => handleChat()}
+                                    onClick={() => newMessage === "" ? handleEmptyValue() : handleChat()}
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"

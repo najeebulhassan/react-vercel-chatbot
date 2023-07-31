@@ -14,7 +14,7 @@ function IntroArea({ questions, chatMessages, preLoader, chatReply, checked }) {
         };
     });
     return (
-        <div className="pb-[200px] pt-4 md:pt-10" style={{ paddingTop: "5rem" }}>
+        <div className="pb-[200px] pt-4 md:pt-10" style={{ paddingTop: "5rem" }} >
             {chatMessages.length === 0 &&
                 <div className={`max-w-2xl px-4 mx-auto`}>
                     <div className={`p-8 border rounded-lg bg-background ${preLoader ? 'loader' : ""}`}>

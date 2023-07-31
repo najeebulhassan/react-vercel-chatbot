@@ -5,7 +5,7 @@ import logo from "../../../../assets/images/logo.png";
 export default function Answers({ message, isReply }) {
     const [displayedText, setDisplayedText] = useState('');
     const [textData, setTextData] = useState('');
-    const [preLoaderText, setPreLoaderText] = useState(['InstructorX analyzing ...', 'InstructorX found optimal answer ... ', 'InstructorX suggest to get ready for the answer ...']);
+    const [preLoaderText, setPreLoaderText] = useState(['InstructorX analyzing', 'InstructorX found optimal answer', 'InstructorX suggest to get ready for the answer']);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
@@ -120,13 +120,17 @@ export default function Answers({ message, isReply }) {
                                 renderParagraphs()
                             )
                             :
-                            <span className="loader">
-                                {
-                                    currentIndex < preLoaderText.length
-                                        ? preLoaderText[currentIndex]
-                                        : preLoaderText[preLoaderText.length - 1]
-                                }
-                            </span>
+                            <div className="loader" style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
+                                <span>
+                                    {
+                                        currentIndex < preLoaderText.length
+                                            ? preLoaderText[currentIndex]
+                                            : preLoaderText[preLoaderText.length - 1]
+                                    }
+
+                                </span>
+                                <div className="dot-carousel"></div>
+                            </div>
                         }
                     </div>
                 </div>
