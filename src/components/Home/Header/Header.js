@@ -109,7 +109,7 @@ export default function Header({ checked, setChecked, allProjects, conversations
                 <div className="flex items-center gap-1">
                     <Link rel="nofollow" to="#"
                     >
-                        <img src={logo} alt="headerlogo" width='100%' />
+                        <img src={logo} alt="headerlogo" width='90%' />
                         {/* <svg
                         viewBox="0 0 17 17"
                         fill="none"
@@ -253,11 +253,11 @@ export default function Header({ checked, setChecked, allProjects, conversations
                     >
                         <path d="M16.88 3.549L7.12 20.451"></path>
                     </svg> */}
-                        {/* <Link
-                        to="#"
-                        className="inline-flex items-center justify-center rounded-md text-sm font-medium shadow ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-4 py-2 ml-2"
-                    > */}
-                        {/* <svg
+                        <Link
+                            to="#"
+                        // className="inline-flex items-center justify-center rounded-md text-sm font-medium shadow ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-4 py-2 ml-2"
+                        >
+                            {/* <svg
                             aria-label="Vercel logomark"
                             role="img"
                             viewBox="0 0 74 64"
@@ -268,23 +268,27 @@ export default function Header({ checked, setChecked, allProjects, conversations
                                 fill="currentColor"
                             ></path>
                         </svg> */}
-                        <span>
-                            <b>InstructorX</b>
-                            {/* <span className="hidden sm:inline"> with Vercel</span> */}
-                        </span>
-                        {/* </Link> */}
+                            <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: '800' }}>
+                                InstructorX
+                                {/* <span className="hidden sm:inline"> with Vercel</span> */}
+                            </span>
+                        </Link>
                     </div>
                 </div>
                 <div className="flex items-center justify-end space-x-2">
 
                     <Stack direction="row" spacing={1} alignItems="center">
-                        <Typography>
-                            <LightModeIcon style={{ width: "1rem" }} />
-                        </Typography>
+                        {checked &&
+                            <Typography>
+                                <LightModeIcon style={{ width: "1rem" }} />
+                            </Typography>
+                        }
                         <AntSwitch checked={checked} onChange={handleChange} inputProps={{ 'aria-label': 'ant design' }} />
-                        <Typography>
-                            <DarkModeIcon style={{ width: "1rem" }} />
-                        </Typography>
+                        {!checked &&
+                            <Typography>
+                                <DarkModeIcon style={{ width: "1rem" }} />
+                            </Typography>
+                        }
                     </Stack>
                     {/* <Link
                         // target="_blank"
